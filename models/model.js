@@ -10,8 +10,8 @@ const dataSchema = new mongoose.Schema({
         type: Number
     },
     parent_id: {
-        required: true,
-        type: String
+        type: mongoose.Schema.Types.ObjectId,
+        default: null
     },
     content: {
         required: true,

@@ -112,9 +112,20 @@ router.get('/getAll', async (req, res) => {
 })
 
 //Get by ID Method
-router.get('/getOne/:id', async (req, res) => {
+router.get('/getParent/:id', async (req, res) => {
     try{
-        const data = await Model.findById(req.params.id);
+        const data = await Model.find({course_module_id: req.params.id, parent_id: null});
+        res.json(data)
+    }
+    catch(error){
+        res.status(500).json({message: error.message})
+    }
+})
+
+//Get by ID Method
+router.get('/getOne/:courseId/:discussionId', async (req, res) => {
+    try{
+        const data = await Model.find({course_module_id: req.params.id, parent_id: req.params.discussionId});
         res.json(data)
     }
     catch(error){
